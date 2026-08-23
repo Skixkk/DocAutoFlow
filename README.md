@@ -2,11 +2,21 @@
  * @Author: Skixkk skixkk7@gmail.com
  * @Date: 2026-08-23 18:03:25
  * @LastEditors: Skixkk skixkk7@gmail.com
- * @LastEditTime: 2026-08-23 22:03:04
+ * @LastEditTime: 2026-08-23 23:35:51
+ * @FilePath: \DocAutoFlow\README.md
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<!--
+ * @Author: Skixkk skixkk7@gmail.com
+ * @Date: 2026-08-23 18:03:25
+ * @LastEditors: Skixkk skixkk7@gmail.com
+ * @LastEditTime: 2026-08-23 23:31:17
  * @FilePath: \DocAutoFlow\README.md
  * @Description: README
 -->
 # DocAutoFlow
+
+[![Deploy VitePress site to Pages](https://github.com/Skixkk/DocAutoFlow/actions/workflows/deploy.yml/badge.svg)](https://github.com/Skixkk/DocAutoFlow/actions/workflows/deploy.yml)
 
 Powershell 基于 Pandoc + LibreOffice 实现的 Markdown 自动流水线实时预览（Word,pdf）&导出工具(加入其他功能请提 issue 或 查看 结尾的 优秀项目/组合)
 
@@ -59,7 +69,6 @@ echo the first text > hi.md
 
 - 如果需要重置目录：直接删除`config.json`，脚本会重新走一遍初始化向导；或 修改 `config.json` 下的 `watchDir` 后面的参数
 - [pandoc_docx_template](https://github.com/Achuan-2/pandoc_docx_template) 下的 `/templates` 提供的 pandoc docx template(可以根据 [作者 `@Achuan-2`](https://github.com/Achuan-2) 提供的 `/template` 下的任意 一个 `.docx` 文件内容，进行自定义适合自己的 pandoc docx template )
-- 
 
 ## version
 
@@ -90,6 +99,6 @@ soffice.exe --headless --convert-to pdf 1.docx --outdir ./
 
 实现 自动 生成和预览
 
-## 其他项目/组合
+## 其他优秀项目/组合
 
 - LaTeX：vscode + LaTeX Workshop(Author: James Yu)
