@@ -2,15 +2,17 @@
  * @Author: Skixkk skixkk7@gmail.com
  * @Date: 2026-08-23 22:26:32
  * @LastEditors: Skixkk skixkk7@gmail.com
- * @LastEditTime: 2026-08-23 23:07:27
+ * @LastEditTime: 2026-08-23 23:53:36
  * @FilePath: \DocAutoFlow\docs\.vitepress\config.ts
  * @Description: config.ts
  */
+
 import { defineConfig } from 'vitepress'
+
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  base: '/docs/',
+  base: '/DocAutoFlow/',
   lang: 'en-US',
 
   head: [
@@ -26,8 +28,8 @@ export default defineConfig({
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     logo: {
-    dark: 'https://runsme-com.github.io/favicon.ico',
-    light: 'https://runsme-com.github.io/light-icon.png',
+      dark: 'https://runsme-com.github.io/favicon.ico',
+      light: 'https://runsme-com.github.io/light-icon.png',
     },
 
     lastUpdated: {
