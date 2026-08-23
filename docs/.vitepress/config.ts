@@ -84,7 +84,7 @@ export default defineConfig({
       { icon: 'github', link: 'https://github.com/Skixkk/DocAutoFlow' }
     ],
 
-    // 在 github 上编辑页面的链接 定义根路径 + docs/ 下的 route，即可实现访问
+    // 在 github 上编辑页面的链接
     editLink: {
       pattern: 'https://github.com/Skixkk/DocAutoFlow/edit/main/docs/:path',
       text: 'Edit this page on GitHub'
