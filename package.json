@@ -1,0 +1,33 @@
+{
+  "name": "docautoflow",
+  "version": "0.0.1",
+  "private": true,
+  "description": "auto output docs & pdf to preview",
+  "keywords": [
+    "pandoc",
+    "LibreOffice"
+  ],
+  "homepage": "https://github.com/Skixkk/DocAutoFlow#readme",
+  "bugs": {
+    "url": "https://github.com/Skixkk/DocAutoFlow/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Skixkk/DocAutoFlow.git"
+  },
+  "license": "MIT",
+  "author": "Skixkk",
+  "type": "module",
+  "scripts": {
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "vitepress": "^2.0.0-alpha.19"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}
