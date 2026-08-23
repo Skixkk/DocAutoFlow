@@ -1,0 +1,8 @@
+blank_issues_enabled: false # 禁止直接新建“空白 Issue”，强制选模板
+# contact_links:
+#   - name: GitHub Community Support
+#     url: https://github.com/orgs/community/discussions
+#     about: Please ask and answer questions here.如为内部正式立项需求，请先在内部系统中创建，再在此关联编号。
+#   - name: GitHub Security Bug Bounty
+#     url: https://bounty.github.com/
+#     about: Please report security vulnerabilities here.

@@ -329,3 +329,35 @@ TSWLatexianTemp*
 # option is specified. Footnotes are the stored in a file with suffix Notes.bib.
 # Uncomment the next line to have this generated file ignored.
 #*Notes.bib
+
+# ============================== Node bun ==============================
+# Nuxt dev/build outputs
+.output
+.data
+.nitro
+.cache
+dist
+
+# Node dependencies
+node_modules
+
+# Logs
+logs
+*.log
+
+# Misc
+.DS_Store
+.fleet
+.idea
+
+# Local env files
+.env
+.env.*
+!.env.example
+
+# docs
+docs/.vitepress/dist
+docs/.vitepress/cache
+cache/
+
+# ============================== Node bun end ==========================

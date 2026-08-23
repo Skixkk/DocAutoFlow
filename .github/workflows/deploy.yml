@@ -1,0 +1,75 @@
+name: Deploy VitePress site to Pages
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0 # 拉取全部git历史 # Not needed if lastUpdated is not enabled
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Install root dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Build with VitePress
+        run: bun run docs:build
+
+      - name: Print directory structure for debug
+        run: |
+          echo "=== Project root ==="
+          ls -l -a
+          echo -e "\n=== Docs folder ==="
+          ls -l -a docs
+          echo -e "\n=== Build output directory ==="
+          ls -l -a docs/.vitepress/dist
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v5
+        # 部署下面的 资源 到虚拟服务器 CI/CD
+        with:
+          path: docs/.vitepress/dist
+
+  # Deployment job
+  deploy:
+    # PR只构建不部署，仅push(main) /手动触发才执行部署
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    needs: build
+    runs-on: ubuntu-latest
+    name: Deploy
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

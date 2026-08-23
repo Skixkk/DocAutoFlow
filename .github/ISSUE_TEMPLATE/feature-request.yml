@@ -1,0 +1,82 @@
+name: "新需求 / Feature"
+description: "用于提交新的功能需求或需求变更"
+title: "[需求] "
+labels:
+  - "feature"
+  - "enhancement"
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢提交新需求 🙏  
+        请尽量填写清晰，方便评估和排期。
+
+  - type: input
+    id: module
+    attributes:
+      label: 影响模块
+      description: 涉及的服务/模块，例如：后端接口、爬虫、前端页面等
+      placeholder: 例如：ecp 爬虫 / 附件浏览接口
+    validations:
+      required: true
+
+  - type: textarea
+    id: background
+    attributes:
+      label: 背景 / 场景
+      description: 为什么要做这个需求？当前遇到什么问题？有没有现有替代方案？
+      placeholder: |
+        简要描述业务背景、角色、使用场景、痛点等…
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: 需求描述
+      description: 希望系统具体怎么变化？最好从“用户视角”来描述。
+      placeholder: |
+        1. 在 xxx 页面增加 ...
+        2. 当用户执行 ... 时，系统应 ...
+        3. 需要支持的边界场景：...
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance_criteria
+    attributes:
+      label: 验收标准
+      description: 哪些情况算是“满足需求”？方便后续自测和验收。
+      placeholder: |
+        - [ ] 场景一：...
+        - [ ] 场景二：...
+        - [ ] 性能 / 安全性要求：...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: 优先级
+      description: 方便排期排序
+      options:
+        - P0（必须本迭代完成）
+        - P1（高优先级）
+        - P2（一般）
+        - P3（低）
+      default: 2
+    validations:
+      required: false
+
+  - type: textarea
+    id: extra
+    attributes:
+      label: 其他信息
+      description: 相关接口、文档链接、设计稿、截图、关联 Issue 等
+      placeholder: |
+        - 接口文档：
+        - 设计稿 / 原型：
+        - 相关 Issue / 需求单：
+    validations:
+      required: false
