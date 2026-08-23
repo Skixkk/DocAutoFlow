@@ -67,6 +67,7 @@ export default defineConfig({
           { text: 'Start', link: '/start' },
           { text: 'Guide', link: '/guide' },
           { text: 'Config', link: '/config' },
+          { text: 'Link', link: '/link' },
           { text: 'Our Team', link: '/our-team' }
         ]
       }
