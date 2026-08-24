@@ -37,7 +37,7 @@ $defaultConfig = [PSCustomObject]@{
 
 
 # 加载配置 + 缺失字段自动补齐
-function Load-Config {
+function Import-Config {
     if (-not (Test-Path $configFile)) {
         Write-Host "`n[初始化] 创建默认配置" -ForegroundColor Cyan
         # 首次生成配置前自动探测二进制绝对路径
@@ -138,7 +138,7 @@ function Read-ValidDirectory {
 
 
 # 加载配置
-$config = Load-Config
+$config = Import-Config
 
 
 
