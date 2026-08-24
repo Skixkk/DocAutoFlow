@@ -1,0 +1,9 @@
+{
+  "watchDir": "D:\\product\\Skixkk\\DocAutoFlow\\markdown",
+  "templateDir": "D:\\product\\Achuan-2\\pandoc_docx_template\\templates",
+  "pandocPath": "C:\\Program Files\\Pandoc\\pandoc.exe",
+  "sofficePath": "D:\\Software\\LibreOffice\\LibreOffice\\program\\soffice.exe",
+  "pollMs": 700,
+  "debounceMs": 300,
+  "LastTemplatePath": "D:\\product\\Achuan-2\\pandoc_docx_template\\templates\\template_标题不编号-列表第二行顶格-无首行缩进.docx"
+}
