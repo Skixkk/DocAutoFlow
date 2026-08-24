@@ -5,9 +5,11 @@
 
 
 
+
 # 强制设置控制台编码
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 $OutputEncoding = [System.Text.Encoding]::UTF8
+
 
 
 
@@ -19,21 +21,23 @@ $defaultWatchDir = $PSScriptRoot
 
 
 
+
 # 默认配置
 $defaultConfig = [PSCustomObject]@{
-    watchDir        = $defaultWatchDir
-    templateDir     = ""
-    pandocPath      = ""
-    sofficePath     = ""
-    pollMs          = 700
-    debounceMs      = 300
+    watchDir         = $defaultWatchDir
+    templateDir      = ""
+    pandocPath       = ""
+    sofficePath      = ""
+    pollMs           = 700
+    debounceMs       = 300
     LastTemplatePath = $null
 }
 
 
 
+
 # 加载配置 + 缺失字段自动补齐
-function Load-Config {
+function Import-Config {
     if (-not (Test-Path $configFile)) {
         Write-Host "`n[初始化] 创建默认配置" -ForegroundColor Cyan
         # 首次生成配置前自动探测二进制绝对路径
@@ -59,24 +63,27 @@ function Load-Config {
         $defaultConfig.pandocPath  = $detectPandoc
 
 
+
         # 探测结果区块（绿色输出，新增 watchDir 参数说明）
         Write-Host "`n[探测结果]" -ForegroundColor Green
         Write-Host '  "watchDir": "'$defaultWatchDir'",' -ForegroundColor Green
-        Write-Host "      ↳ Markdown监听目录，默认脚本所在目录，可在配置向导中自定义或修改配置文件" -ForegroundColor Green
+        Write-Host "       ↳ Markdown监听目录，默认脚本所在目录，可在配置向导中自定义或修改配置文件" -ForegroundColor Green
         Write-Host '  "pandocPath": "'$detectPandoc'",' -ForegroundColor Green
-        Write-Host "      ↳ Pandoc可执行文件路径，用于Markdown转docx" -ForegroundColor Green
+        Write-Host "       ↳ Pandoc可执行文件路径，用于Markdown转docx" -ForegroundColor Green
         Write-Host '  "sofficePath": "'$detectSoffice'",' -ForegroundColor Green
-        Write-Host "      ↳ LibreOffice可执行文件路径，用于docx转PDF" -ForegroundColor Green
+        Write-Host "       ↳ LibreOffice可执行文件路径，用于docx转PDF" -ForegroundColor Green
         Write-Host '  "pollMs": '$defaultConfig.pollMs',' -ForegroundColor Green
-        Write-Host "      ↳ 文件轮询间隔(毫秒)，多久扫描一次md文件变更" -ForegroundColor Green
+        Write-Host "       ↳ 文件轮询间隔(毫秒)，多久扫描一次md文件变更" -ForegroundColor Green
         Write-Host '  "debounceMs": '$defaultConfig.debounceMs -ForegroundColor Green
-        Write-Host "      ↳ 防抖延时(毫秒)，文件停止改动后等待多久再开始转换`n" -ForegroundColor Green
+        Write-Host "       ↳ 防抖延时(毫秒)，文件停止改动后等待多久再开始转换`n" -ForegroundColor Green
+
 
 
         $defaultConfig | ConvertTo-Json -Depth 10 | Out-File $configFile -Encoding utf8
     }
     $rawJson = Get-Content $configFile -Raw
     $cfg = $rawJson | ConvertFrom-Json
+
 
 
 
@@ -97,6 +104,7 @@ function Load-Config {
     }
     return $cfg
 }
+
 
 
 
@@ -128,8 +136,10 @@ function Read-ValidDirectory {
 
 
 
+
 # 加载配置
-$config = Load-Config
+$config = Import-Config
+
 
 
 
@@ -146,6 +156,7 @@ if ([string]::IsNullOrWhiteSpace($config.watchDir) -or [string]::IsNullOrWhiteSp
 
 
 
+
 $watchDir = $config.watchDir
 $templateDir = $config.templateDir
 $sofficePath = $config.sofficePath
@@ -153,6 +164,7 @@ $pandocPath = $config.pandocPath
 $pollMs = $config.pollMs
 $debounceMs = $config.debounceMs
 $lastSelectedTemplate = $config.LastTemplatePath
+
 
 
 
@@ -182,6 +194,7 @@ function Resolve-BinaryPath {
 
 
 
+
 # ============ soffice.exe 检测 ============
 $detectedSoffice = Resolve-BinaryPath $sofficePath "soffice.exe"
 if ($detectedSoffice) {
@@ -196,6 +209,7 @@ else {
     Write-Host "请安装 LibreOffice 并添加至系统环境变量 PATH`n" -ForegroundColor Yellow
     exit 1
 }
+
 
 
 
@@ -216,8 +230,10 @@ else {
 
 
 
+
 # 检测发生变更则回写配置文件
 $config | ConvertTo-Json -Depth 10 | Out-File $configFile -Encoding utf8
+
 
 
 
@@ -235,6 +251,7 @@ if (-not (Test-Path $watchDir -PathType Container)) {
 
 
 
+
 # 获取目录下全部docx模板
 $templateFiles = Get-ChildItem -Path $templateDir -Filter "*.docx" -File
 if (-not $templateFiles) {
@@ -244,11 +261,13 @@ if (-not $templateFiles) {
 
 
 
+
 Write-Host "`n===== 可用docx模板列表 =====" -ForegroundColor Cyan
 for ($i = 0; $i -lt $templateFiles.Count; $i++) {
     $f = $templateFiles[$i]
     Write-Host "[$($i+1)] $($f.Name)"
 }
+
 
 
 
@@ -261,6 +280,7 @@ else {
 }
 Write-Host "`n请输入模板序号，$defaultHint" -ForegroundColor Yellow
 $inputVal = Read-Host
+
 
 
 
@@ -289,9 +309,11 @@ else {
 
 
 
+
 # 更新配置里面 LastTemplatePath，回写到json
 $config.LastTemplatePath = $templatePath
 $config | ConvertTo-Json -Depth 10 | Out-File $configFile -Encoding utf8
+
 
 
 
@@ -302,10 +324,12 @@ $debounceTrigger = @{}
 
 
 
+
 # 单次构建逻辑
 function Invoke-Build {
     param([string]$mdPath)
     Write-Host "`n>>>> 检测文件变更: $mdPath" -ForegroundColor Green
+
 
 
 
@@ -318,9 +342,9 @@ function Invoke-Build {
     }
     Write-Host "✅ 已生成 $docx"
 
-
-
-    & $sofficePath --headless --convert-to pdf $docx --outdir $watchDir
+    # PDF输出至md源文件同级目录
+    $sourceDir = Split-Path $mdPath -Parent
+    & $sofficePath --headless --convert-to pdf $docx --outdir $sourceDir
     if ($LASTEXITCODE -ne 0) {
         Write-Warning "LibreOffice转PDF失败 $docx"
         return
@@ -330,16 +354,20 @@ function Invoke-Build {
 
 
 
-Write-Host "[监听启动] 监控目录 $watchDir *.md 文件大小变化" -ForegroundColor Cyan
+
+Write-Host "[监听启动] 递归监控目录 $watchDir 及其子目录下 *.md 文件大小变化" -ForegroundColor Cyan
 Write-Host "防抖延时: $debounceMs ms  当前生效模板: $templatePath`n" -ForegroundColor Gray
 Write-Host "按 Ctrl+C 退出`n" -ForegroundColor Yellow
+
 
 
 
 try {
     while ($true) {
         $now = [DateTimeOffset]::Now.ToUnixTimeMilliseconds()
-        $mdFiles = Get-ChildItem -Path $watchDir -Filter "*.md" -File
+        # 增加-Recurse 参数，递归扫描全部子目录
+        $mdFiles = Get-ChildItem -Path $watchDir -Filter "*.md" -File -Recurse
+
 
 
 
@@ -349,11 +377,13 @@ try {
 
 
 
+
             # 文件大小发生改变，刷新防抖时间
             if (-not $lastFileSize.ContainsKey($key) -or $lastFileSize[$key] -ne $currentSize) {
                 $lastFileSize[$key] = $currentSize
                 $debounceTrigger[$key] = $now
             }
+
 
 
 
