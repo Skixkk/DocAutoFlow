@@ -1,12 +1,3 @@
----
-prev:
-  text: 'Start'
-  link: '/start'
-next: 
-  text: 'Config'
-  link: '/config'
----
-
 # Guide
 
 [![Deploy VitePress site to Pages](https://github.com/Skixkk/DocAutoFlow/actions/workflows/deploy.yml/badge.svg)](https://github.com/Skixkk/DocAutoFlow/actions/workflows/deploy.yml)
