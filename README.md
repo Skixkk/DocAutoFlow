@@ -2,7 +2,7 @@
  * @Author: Skixkk skixkk7@gmail.com
  * @Date: 2026-08-23 18:03:25
  * @LastEditors: Skixkk skixkk7@gmail.com
- * @LastEditTime: 2026-08-23 23:35:51
+ * @LastEditTime: 2026-08-25 00:54:46
  * @FilePath: \DocAutoFlow\README.md
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -26,7 +26,8 @@ Powershell 基于 Pandoc + LibreOffice 实现的 Markdown 自动流水线实时�
 
 此项目以及其简单粗暴的方式借助 `Powershell + Pandoc + LibreOffice` 解决了 markdown 不能在 vscode 预览 docx 效果的问题，配置教程可见如下 bilibili 教程或继续阅读下面内容。
 
-- [bilibili 教程 预留位](https://www.bilibili.com/)
+- [bilibili 手把手配置 DocAutoFlow 教程&原理解析](https://www.bilibili.com/video/BV17RhN6fEm5)
+- [bilibili DocAutoFlow 子目录监控演示](https://www.bilibili.com/video/BV1tvhN6kEij)
 
 ### 这是一个 preview version
 
