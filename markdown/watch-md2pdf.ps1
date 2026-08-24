@@ -321,6 +321,8 @@ $config | ConvertTo-Json -Depth 10 | Out-File $configFile -Encoding utf8
 $lastFileSize = @{}
 # 防抖计时器: key=文件全路径, value=最后一次变更时间戳
 $debounceTrigger = @{}
+# 转换任务队列，串行逐个执行转换，避免大批量同时转换失败
+$convertQueue = [System.Collections.Queue]::new()
 
 
 
@@ -387,15 +389,24 @@ try {
 
 
 
-            # 满足防抖时间条件才执行编译
+            # 满足防抖时间条件，加入串行队列，不直接执行转换
             if ($debounceTrigger.ContainsKey($key)) {
                 $elapsed = $now - $debounceTrigger[$key]
                 if ($elapsed -ge $debounceMs) {
-                    Invoke-Build -mdPath $key
+                    if(-not $convertQueue.Contains($key)){
+                        $convertQueue.Enqueue($key)
+                    }
                     $debounceTrigger.Remove($key)
                 }
             }
         }
+
+        # 消费队列，逐个串行执行转换任务
+        while($convertQueue.Count -gt 0){
+            $item = $convertQueue.Dequeue()
+            Invoke-Build -mdPath $item
+        }
+
         Start-Sleep -Milliseconds $pollMs
     }
 }
