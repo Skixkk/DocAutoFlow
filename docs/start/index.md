@@ -19,6 +19,8 @@ next:
 
 ## Start
 
+![OUTPUTGIF](https://youupro.xyz/OUTPUTGIF2.gif)
+
 ```Bash
 git clone https://github.com/Skixkk/DocAutoFlow
 
