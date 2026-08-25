@@ -2,7 +2,7 @@
  * @Author: Skixkk skixkk7@gmail.com
  * @Date: 2026-08-23 18:03:25
  * @LastEditors: Skixkk skixkk7@gmail.com
- * @LastEditTime: 2026-08-25 00:54:46
+ * @LastEditTime: 2026-08-25 16:43:15
  * @FilePath: \DocAutoFlow\README.md
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -49,6 +49,10 @@ Powershell 基于 Pandoc + LibreOffice 实现的 Markdown 自动流水线实时�
 - LibreOffice
 
 ## Quick Start
+
+[文档地址](https://skixkk.github.io/DocAutoFlow/):`https://skixkk.github.io/DocAutoFlow/`
+
+![show DocAutoFlow](https://youupro.xyz/OUTPUTGIF2.gif)
 
 ```Bash
 git clone https://github.com/Skixkk/DocAutoFlow
